@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: francis-bockarie-portfolio
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: 1 
