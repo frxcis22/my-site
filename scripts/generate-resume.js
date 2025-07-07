@@ -1,0 +1,145 @@
+const fs = require('fs');
+const path = require('path');
+const PDFDocument = require('pdfkit');
+
+// Create a new PDF document
+const doc = new PDFDocument({
+  size: 'A4',
+  margin: 50
+});
+
+// Create the output directory if it doesn't exist
+const outputDir = path.join(__dirname, '../public');
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
+}
+
+// Pipe the PDF to a file
+const outputPath = path.join(outputDir, 'resume.pdf');
+doc.pipe(fs.createWriteStream(outputPath));
+
+// Add content to the PDF
+doc
+  .fontSize(24)
+  .font('Helvetica-Bold')
+  .text('Francis Fallah Bockarie', { align: 'center' })
+  .moveDown()
+  .fontSize(12)
+  .font('Helvetica')
+  .text('Sharon Hill, PA', { align: 'center' })
+  .text('Email: francisbock20@gmail.com | Phone: (610) 483-3022', { align: 'center' })
+  .text('LinkedIn: linkedin.com/in/francisbockarie | GitHub: github.com/francisbockarie', { align: 'center' })
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('PROFESSIONAL SUMMARY', { underline: true })
+  .moveDown()
+  .fontSize(11)
+  .font('Helvetica')
+  .text('IT Security & Risk professional with experience in vulnerability assessments, incident response, and technical support. Demonstrates strong leadership, communication, and problem-solving skills through cross-functional projects and student-led initiatives. Adept at implementing security frameworks and building secure applications to support enterprise goals. Passionate about safeguarding digital environments through proactive and scalable strategies.')
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('EDUCATION', { underline: true })
+  .moveDown()
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('Bachelor of Science in Information Technology Security & Risk Analysis')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('Pennsylvania State University – Brandywine • August 2019 - May 2024')
+  .text('GPA: 3.8/4.0')
+  .moveDown()
+  .fontSize(11)
+  .text('Relevant Coursework: Network Security, Risk Management, Information Assurance, Security Architecture')
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('CERTIFICATIONS', { underline: true })
+  .moveDown()
+  .fontSize(11)
+  .font('Helvetica')
+  .text('• CompTIA Security+ (In Progress)')
+  .text('• Certified in Vendor Risk Management (In Progress)')
+  .text('• AWS Cloud Practitioner (In Progress)')
+  .text('• Microsoft Azure Fundamentals (Planned)')
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('PROFESSIONAL EXPERIENCE', { underline: true })
+  .moveDown()
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('Audio/Visual Technician & Security Assistant')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('The Institute\'s Knowledge Company • July 2024 – Present')
+  .moveDown()
+  .fontSize(10)
+  .text('• Maintained and supported corporate conference room systems through daily diagnostics and AV checks')
+  .text('• Coordinated multimedia setup for high-level meetings, including visuals and hybrid audio-visual solutions')
+  .text('• Led the development of vendor assessments in OneTrust, writing and customizing over 70% of the third-party risk questionnaire used to evaluate the security, risk, compliance, Governance, and data privacy posture of external vendors')
+  .text('• Supported implementation and training efforts for Varonis Data Security Platform, assisting in monitoring sensitive data access, configuring alerts, and aligning governance with internal risk policies')
+  .moveDown(2)
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('IT Intern – Infrastructure & Security')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('United States Liability Insurance (USLI) • March 2023 – May 2024')
+  .moveDown()
+  .fontSize(10)
+  .text('• Conducted internal threat analysis and helped reduce risk exposure through patching and awareness')
+  .text('• Provided end-user technical support for over 200 employees, resolving hardware/software issues')
+  .text('• Researched cybersecurity trends and suggested improvements to strengthen the IT infrastructure')
+  .text('• Partnered with cross-functional teams to reinforce endpoint protection and IT compliance efforts')
+  .moveDown(2)
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('Engineering Technician (Contractor)')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('Communication Test Design, Inc. (CTDI) • June 2024 – July 2024')
+  .moveDown()
+  .fontSize(10)
+  .text('• Performed diagnostics and QA testing on telecommunications hardware to meet specs')
+  .text('• Supported engineers with hardware configuration, repairs, and technical documentation')
+  .text('• Assisted in reducing testing cycle time by 10% through accurate reporting and efficient troubleshooting')
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('TECHNICAL SKILLS', { underline: true })
+  .moveDown()
+  .fontSize(11)
+  .font('Helvetica')
+  .text('Security & Risk: Vulnerability Assessment, Risk Analysis, Incident Response, Compliance, Third-party Risk Management, Project Management, IST Integration')
+  .text('Tools: Wireshark, MySQL, OneTrust, Varonis, Jira, Active Directory')
+  .text('Programming: Java, Python, HTML, CSS, JavaScript, Command Line (CMD)')
+  .text('Other: Microsoft Office Suite, Technical Documentation')
+  .moveDown(2)
+  .fontSize(16)
+  .font('Helvetica-Bold')
+  .text('PROJECTS', { underline: true })
+  .moveDown()
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('Vendor Risk Assessment System')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('• Led development of comprehensive vendor assessment framework in OneTrust')
+  .text('• Customized over 70% of third-party risk questionnaire')
+  .text('• Evaluated security, risk, compliance, governance, and data privacy posture of external vendors')
+  .moveDown()
+  .fontSize(12)
+  .font('Helvetica-Bold')
+  .text('Data Security Platform Implementation')
+  .fontSize(11)
+  .font('Helvetica')
+  .text('• Supported Varonis Data Security Platform deployment and training')
+  .text('• Assisted in monitoring sensitive data access and configuring alerts')
+  .text('• Aligned governance with internal risk policies');
+
+// Finalize the PDF
+doc.end();
+
+console.log('Professional resume PDF generated successfully at:', outputPath); 
