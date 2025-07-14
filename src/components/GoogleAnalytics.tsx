@@ -3,9 +3,11 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+// Declare global types for Google Analytics
 declare global {
   interface Window {
     gtag: (...args: any[]) => void;
+    dataLayer: any[];
   }
 }
 
@@ -26,26 +28,33 @@ const GoogleAnalytics = () => {
   }, [pathname]);
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+
     // Load Google Analytics script
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
     document.head.appendChild(script);
 
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag() {
-      window.dataLayer.push(arguments);
+    // Initialize dataLayer
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).gtag = function gtag(...args: any[]) {
+      (window as any).dataLayer.push(args);
     };
 
-    window.gtag('js', new Date());
-    window.gtag('config', GA_TRACKING_ID, {
+    // Configure Google Analytics
+    (window as any).gtag('js', new Date());
+    (window as any).gtag('config', GA_TRACKING_ID, {
       page_title: 'Francis Bockarie Portfolio',
       anonymize_ip: true,
       cookie_flags: 'SameSite=None;Secure',
     });
 
     return () => {
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
 
