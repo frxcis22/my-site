@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import React from 'react'
+import GoogleAnalytics from '../components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className + ' bg-primary text-text-primary'}>
+        <GoogleAnalytics />
         <main className="min-h-screen bg-primary text-text-primary">
           {children}
         </main>
