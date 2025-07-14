@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
           </a>
         </div>
         <div className="flex space-x-4 mt-2">
-          <a href="https://linkedin.com/in/francisbockarie" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-white transition-colors"><FaLinkedin size={28} /></a>
+          <a href="https://www.linkedin.com/in/francis-bockarie-b6080b197" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-white transition-colors"><FaLinkedin size={28} /></a>
           <a href="https://github.com/francisbockarie" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-white transition-colors"><FaGithub size={28} /></a>
           <a href="mailto:francisbock20@gmail.com" className="text-accent hover:text-white transition-colors"><FaEnvelope size={28} /></a>
         </div>
